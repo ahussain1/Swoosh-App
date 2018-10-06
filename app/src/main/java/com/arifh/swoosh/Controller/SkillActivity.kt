@@ -20,6 +20,18 @@ class SkillActivity : AppCompatActivity() {
         player = intent.getParcelableExtra(EXTRA_PLAYER)
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable(EXTRA_PLAYER, player)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if(savedInstanceState != null) {
+            player = savedInstanceState.getParcelable(EXTRA_PLAYER)
+        }
+    }
+
     fun onSkillFinishClicked(view: View) {
         if(player.skill != "") {
             val finishActivity = Intent(this, FinishActivity::class.java)
